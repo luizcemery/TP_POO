@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <stack>
 #include "Edge.h"
 
 class Graph
@@ -11,14 +13,14 @@ class Graph
 
 public:
 
-	bool insert(Edge aresta);
-	bool remove(Edge aresta);
-	bool edge(Edge aresta);
+	bool insert(Edge edge);
+	bool remove(Edge edge);
+	bool _edge(Edge edge);
 	bool is_complete();
 	bool complete();
 	
-	void BFS(int vertice);
-	void DFS(int vertice);
+	std::vector<int> BFS(int vertice);
+	std::vector<int> DFS(int vertice);
 
 
 	std::vector<int> Dijkstra(int begin, int end);
@@ -27,7 +29,7 @@ public:
 	int N_Component();
 	int cont_edge();
 
-	
+	void print_matrix();
 	
 	Graph(int V);
 	~Graph();
