@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+	// Savio, dudu e negao
 	Lista lista;
 	lista.recebe("Teste.txt");
 	lista.grava();
