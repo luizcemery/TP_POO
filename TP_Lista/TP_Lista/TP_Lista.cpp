@@ -1,14 +1,19 @@
 // TP_Lista.cpp : Defines the entry point for the console application.
 //
+#include "stdafx.h"
 #include <iostream>
 #include "Lista.h"
-#include "stdafx.h"
 using namespace std;
 
 
 int main()
 {
-	cout << "NEGAO EH LINDO" << endl;
+	Lista lista;
+	lista.recebe("Teste.txt");
+	lista.grava();
+	lista.grava("Teste3.txt");
+	lista.grava();
+	system("pause");
     return 0;
 }
 

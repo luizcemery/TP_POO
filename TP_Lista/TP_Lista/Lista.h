@@ -3,11 +3,14 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include "Dado.h"	
+#include <fstream>
 
 
 class Lista
 {
-	
+	Dado *cabeca,*ultimo;
+
 public:
 	Lista();
 	~Lista();
@@ -15,9 +18,9 @@ public:
 	bool inserir(int item);
 	bool verifica(int item);
 	bool retirar(int item);
-	void grava(std::string arq);
+	void grava(char *arq);
 	void grava();
-	void recebe(std::string arq);
+	void recebe(char *arq);
 	void recebe();
 
 
