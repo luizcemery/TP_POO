@@ -13,6 +13,7 @@ Graph::Graph(int V)
 	}
 }
 
+/*Insere uma aresta caso ela ainda não esteja no grafo.*/
 bool Graph::insert(Edge edge)
 {
 	if (matrix[edge.node1][edge.node2] == 0)//Edge is not in the matrix.
@@ -28,6 +29,7 @@ bool Graph::insert(Edge edge)
 	}
 }
 
+/*Imprime matriz que representa o grafo.*/
 void Graph::print_matrix()
 {
 	for (int i = 0; i < vertices; i++)
@@ -39,6 +41,7 @@ void Graph::print_matrix()
 	}
 }
 
+/*Remove uma aresta do grafo caso ela esteja no grafo.*/
 bool Graph::remove(Edge edge)
 {
 	if (matrix[edge.node1][edge.node2] == 0) //Edge is not in the matrix
@@ -56,6 +59,7 @@ bool Graph::remove(Edge edge)
 	}
 }
 
+/*Checa se uma determinada aresta se encontra no grafo.*/
 bool Graph::_edge(Edge edge)
 {
 	if (matrix[edge.node1][edge.node2] == edge.weight)//?????????
@@ -65,6 +69,7 @@ bool Graph::_edge(Edge edge)
 	else return false;
 }
 
+/*Função booleana que retorna true se o grafo estiver completo.*/
 bool Graph::is_complete()
 {
 	for (int i = 0; i < vertices; i++)
@@ -77,6 +82,7 @@ bool Graph::is_complete()
 	return true;
 }
 
+/*Completa o grafo caso ele não esteja completo.*/
 bool Graph::complete() // ????? Peso das novas arestas ??????
 {
 	for (int i = 0; i < vertices; i++)
@@ -99,6 +105,83 @@ int Graph::cont_edge()
 	return arestas;
 }
 
+int Graph::N_Component()
+{
+	
+	list<int> nodes;
+	int aux,cont = 0;
+	for (int i = 0; i < vertices; i++)
+	{
+		nodes.push_back(i);
+	}
+	while (!nodes.empty())
+	{
+		vector<int> visitados;
+		aux = nodes.front();
+		nodes.pop_front();
+		visitados = DFS(aux);
+		for (int i = 0; i < visitados.size(); i++)
+		{
+			nodes.remove(visitados[i]);
+		}
+		cont++;
+	}
+	return cont;
+}
+
+vector<int> Graph::Dijkstra(int begin, int end)
+{
+	vector<int> cost, visitados, pai, path;
+	queue<int> fila;
+	int aux;
+
+	cost.resize(vertices);
+	visitados.resize(vertices);
+	pai.resize(vertices);
+
+	for (int i = 0; i < vertices; i++)
+	{
+		cost[i] = 10000;
+	}
+
+	cost[begin] = 0;
+
+	fila.push(begin);
+	while (!fila.empty())
+	{
+		aux = fila.front();
+		fila.pop();
+		if (visitados[aux] == 0)
+		{
+			visitados[aux] = 1;
+		}
+		for (int i = 0; i < vertices; i++)
+		{
+			if (matrix[aux][i] != 0)
+			{
+				if ((matrix[aux][i] + cost[aux]) < cost[i])
+				{
+					cost[i] = matrix[aux][i] + cost[aux];
+					pai[i] = aux;
+				}
+				if (visitados[i] == 0)
+				{
+					fila.push(i);
+				}
+			}
+		}
+	}
+	aux = end;
+	while (aux != begin)
+	{
+		path.insert(path.begin(), aux);
+		aux = pai[aux];
+	}
+	path.insert(path.begin(), begin);
+	return path;
+}
+
+/*Busca em largura no grafo.*/
 vector<int> Graph::BFS(int vertice)
 {
 	queue<int> fila;
@@ -126,6 +209,8 @@ vector<int> Graph::BFS(int vertice)
 	return path;
 }
 
+
+/*Busca em profundidade do grafo.*/
 vector<int> Graph::DFS(int vertice)
 {
 	stack<int> pilha;
