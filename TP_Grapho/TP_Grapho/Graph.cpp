@@ -120,7 +120,7 @@ int Graph::N_Component()
 		aux = nodes.front();
 		nodes.pop_front();
 		visitados = DFS(aux);
-		for (int i = 0; i < visitados.size(); i++)
+		for (unsigned int i = 0; i < visitados.size(); i++)
 		{
 			nodes.remove(visitados[i]);
 		}
@@ -134,7 +134,18 @@ vector<int> Graph::Dijkstra(int begin, int end)
 	vector<int> cost, visitados, pai, path;
 	queue<int> fila;
 	int aux;
-
+	if ((end >= vertices)||(end < 0))
+	{
+		cout << "Destino nao existe." << endl;
+		path.push_back(-1);
+		return path;
+	}
+	else if ((begin >= vertices) || (begin < 0))
+	{
+		cout << "Origem nao existe." << endl;
+		path.push_back(-1);
+		return path;
+	}
 	cost.resize(vertices);
 	visitados.resize(vertices);
 	pai.resize(vertices);

@@ -141,5 +141,5 @@ Lista::~Lista()
 		Dado *aux = cabeca;
 		cabeca = cabeca->prox;
 		free(aux);
-	}
+	}	
 }
